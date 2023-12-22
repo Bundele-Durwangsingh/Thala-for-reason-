@@ -20,5 +20,4 @@ def thala():
         return render_template("index.html", label=-1)
 
 
-if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+
