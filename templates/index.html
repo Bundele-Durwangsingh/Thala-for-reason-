@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter String</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/style.css') }}">
+
+</head>
+
+<body class="bg-sucess">
+    {% if label %}
+    <div id="result">
+        {% if label == 1 %}
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1>Thala for reason</h1>
+                <video controls autoplay>
+
+                    <source src="{{ url_for('static', filename='styles/movie.mp4') }}" type="video/mp4">
+                </video>
+            </div>
+        </div>
+        {% else %}
+        <h3 style="text-align: center;">Nope try again with 7 charaters</h3>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <form class="form-inline" action="/thala" method="post">
+        <label for="email">String:</label>
+        <input type="text" id="str" placeholder="Enter string eg:- America" name="str">
+        <input type="submit" value="submit" class="btn btn-block btn-sucess btn-lg text-light">
+    </form>
+
+
+    <!-- Your existing HTML code -->
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        var video = document.querySelector('video'); // Get the video element
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the page loads
+        window.onload = function () {
+            var label = "{{ label }}"; // Add quotes to the Flask variable
+            if (label === "1") { // Compare as string
+                modal.style.display = "block";
+            }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+            video.pause(); // Pause the video when closing the modal
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                video.pause(); // Pause the video when clicking outside the modal
+            }
+        }
+    </script>
+
+
+</body>
+
+</html>
